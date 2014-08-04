@@ -1,6 +1,6 @@
 {-# LANGUAGE OverloadedStrings #-}
 import Control.Applicative
-import Control.Monad.Trans.Resource (ExceptionT(runExceptionT))
+import Control.Monad.Trans.Resource (ExceptionT, runExceptionT )
 import Control.Exception (throw)
 import Data.Maybe (fromMaybe)
 import Data.Functor.Identity (Identity(runIdentity))

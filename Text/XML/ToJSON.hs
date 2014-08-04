@@ -23,7 +23,7 @@ import Control.Exception (Exception)
 import Data.Typeable (Typeable)
 import qualified Data.Text as T
 import qualified Data.ByteString.Lazy as L
-import Data.Conduit (($=), ($$), MonadThrow(monadThrow))
+import Data.Conduit (($=), ($$))
 import qualified Data.Conduit.List as C
 import qualified Data.HashMap.Strict as HM
 import qualified Data.Vector as V
@@ -32,6 +32,7 @@ import Text.HTML.TagStream
 import qualified Text.HTML.TagStream.Text as T
 import Text.XML.ToJSON.Builder
 import Data.Aeson (Value(..), Object, FromJSON, fromJSON, Result(Error, Success))
+import Control.Monad.Trans.Resource
 
 -- | Convert tagstream-conduit `Token' to xml element `Builder'
 tokenToBuilder :: T.Token -> Builder

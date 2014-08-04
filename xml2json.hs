@@ -10,6 +10,7 @@ import qualified Data.ByteString.Lazy.Char8 as L
 import Data.Aeson (encode)
 import Text.XML.ToJSON (tokensToJSON)
 import Text.HTML.TagStream.Text (tokenStreamBS)
+import  Control.Monad.Trans.Resource  
 
 main :: IO ()
 main = do

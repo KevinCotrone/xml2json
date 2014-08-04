@@ -18,13 +18,14 @@ import qualified Data.ByteString.Lazy as L
 import qualified Data.HashMap.Strict as HM
 import qualified Data.Vector as V
 import Data.Aeson (Value(..), FromJSON, fromJSON, Result(Error, Success))
-import Data.Attoparsec.Text (parseOnly, number)
-import Data.Conduit (($=), ($$), MonadThrow(monadThrow))
+import Data.Attoparsec.Text (parseOnly, number, scientific)
+import Data.Conduit (($=), ($$))
 import qualified Data.Conduit.List as C
 import Text.XML.ToJSON.Builder (Element(..))
 import qualified Text.XML.ToJSON as ToJSON
 import qualified Text.HTML.TagStream.Text as T
 import Text.XML.ToJSON hiding (parseXML, xmlToJSON, tokensToJSON, elementToJSON)
+import Control.Monad.Trans.Resource
 
 -- | parse xml to haskell data type by using aeson's `FromJSON'.
 parseXML :: (MonadThrow m, FromJSON a) => L.ByteString -> m a
@@ -66,7 +67,7 @@ plistValue (t, elm) = case t of
     parseNumber :: Text -> Value
     parseNumber "" = Null
     parseNumber s = either (error . ("parse number failed:"++)) Number $
-                        parseOnly number s
+                        parseOnly scientific s
 
     plistObject :: Element -> Value
     plistObject (Element _ _ cs) =
